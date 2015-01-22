@@ -57,16 +57,29 @@ The model will be a way to acces the table that we just created inside of our da
  ## Your code goes here!
  - We are just gona populate our table with a bunch of cars!
  open `seeds.rb` located in db/seeds.rb
+ ```1.upto(5) do |num|
+  Product.create(name: "Product_#{num}", price: num*3.99)
+  end
+```
+- on the terminal:
 
+`rake db:seed`
 
-## Rules
+## Now we show get data from the DB
+- Go head open : views/controllers/cars_controller.rb. and add the following code.
+```class ProductsController < ApplicationController
+  def index
+    @instancevariabe = Class.all
+  end
+end
+```
+## Show the data on screen.
+- open : app/views/directoryyoucreated/index.html.erb.
+```<h2>Products</h2>
+  <ul>
+   <% @instancev.each do |i| %>
+    <li><%= i.method %></li>
+    <% end %>
+  </ul>
+```
 
-- Do not assign *any* variables
-- Do not modify the function declarations themselves; they already have the proper arguments and names needed there to make the tests pass.
-- Do not use the `.each` method unless specifically told to do such
-- Do not user a `for` loop
-- Do not modify the tests
-- Do not modify other code that is marked to not be modified
-- Do not write any input/output using puts or gets
-
-You may find the [symbol to proc](http://stackoverflow.com/questions/1217088/what-does-mapname-mean-in-ruby) is also highly useful for writing shorter code. You may end up chaining many methods in each method to get the expected result.
