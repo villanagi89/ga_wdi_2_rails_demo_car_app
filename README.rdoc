@@ -6,15 +6,58 @@
 
 - Make sure you have Rails installed
 `gem install` rails`
-with the lab, make a pull request.
-- Run `bundle install` to ensure you have Rspec properly installed.
-- Run rspec test by running `rspec spec/basic_enum_spec.rb`
-- Following the below rules, edit the `lib/enum/basic_enum.rb` to make the tests pass
-- Move on to the `spec/arrays_spec.rb` and `spec/nested_spec.rb` tests
+- Create your new Rails app
+`rails new nameoffile_app --database=postgresql`
+- Change into you new directory
+`cd nameofdir`
+-Start rails listening to http://localhost:3000 "To check in what port you are in run" `rails s`. In your terminal it should show http://localhost:3000.
+-Run `bundle install` if you change a gem file or because it is alsways a good idea.
+- NOTE : to stop the terminal from listening do `Ctrl C`
+-NOTE 2: You need to iniatiate and finalize the "listening to the server part, everytime you want to make a change"
+- The webiste it's gonna say no 'database error'
 
-If you hit one that's too hard, you can skip and move onto the next one and come back.
+## Create a DB (database)
 
-In the `rspec spec/basic_enum_spec.rb` there are links to documentation that maps almost directly to each problem.
+-`rake db:create`
+- You created a database container. It is empty! but it should still get rid of our error.
+-`rails s` same as `rails server`
+You should get an error "No route matches [GET] "/products"
+This means that rails router doesn't know what to do with our request.
+- open `config/routes.rb` and add: `get 'newfile', to: 'newfile#index'
+This will tell our GET request to go to dir `controllers` and look for the `file_controller.rb`
+
+## Create the File Controller
+
+- `touch app/controllers/file_controller.rb`
+go head and open that file in your text editor and type:
+
+```class ProductsController < ApplicationController
+
+    def index
+    end
+  end
+```
+## Create a view
+`app/views/resourcename/action.html.erb` In here you have to create the resourcename and action.html.erb files. Just makes sure they go inside views directory and they  make sence to the product you are making.
+- Add some test text in here... just to make sure it works
+
+## Create a table that is gonna live inside the DB you created
+- To start we are going to : Create a Rails migration file (This will create the information that will go in your table)
+
+`rails generate migration CreateFile name description price:decimal` two things about this bit of code. Watch your CAPS `CreateFile` is your file `name` is your "key"(method) then a description maybe a string. Then `price:decimal`. You need ( : a colon ) becuase you are telling the database what kind of data type you are introducing
+ - `rake db:migrate` tell your database what you created.
+
+## Create a Rails model
+The model will be a way to acces the table that we just created inside of our data base.
+  - `touch app/models/files.rb`
+  - open your new created files.rb and type the following:
+  -```class Product < ActiveRecord::Base
+      end
+  ```
+ ## Your code goes here!
+ - We are just gona populate our table with a bunch of cars!
+ open `seeds.rb` located in db/seeds.rb
+
 
 ## Rules
 
